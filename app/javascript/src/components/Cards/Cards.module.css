@@ -9,8 +9,7 @@ html,body{margin-top: 50px;}
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  
-  margin: 0px;
+  margin-top: 10px;
   background-color: rgb(17, 24, 39) !important;
 }
 
