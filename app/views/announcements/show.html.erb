@@ -1,0 +1,154 @@
+<% provide(:page_title, "Announcements") %>
+<% provide(:announcement_active, "active") %>
+
+<% if user_signed_in? %>
+    <%= render 'shared/navbar_user' %>
+<% else %>
+    <%= render 'shared/navbar_public' %>
+<% end %>
+
+<div class="md:flex md:flex-col md:justify-center md:items-center md:mt-12">
+<main class="bg-white max-w-6xl mx-4 p-8 md:p-12 my-2 rounded-lg shadow-2xl pt-6 mt-20">
+  <div class="text-center">
+    <%= image_tag(@announcement.image_link, :class=>"inline-block rounded-full h-40 w-40 shadow-lg")%>
+  </div>
+  <div class="mb-3 pt-3 text-center">
+    <%= @announcement.title %>
+  </div>
+  <div class="mb-1 pt-3">
+    <div class="text-xs text-gray-400"><%= @announcement.created_at.strftime("%B, %d, %Y")%></div>
+  </div>
+  <div class="mb-3 pt-1">
+    <div class="text-justify"><%= @announcement.body %></div>
+  </div>
+
+  <div>
+    <%= link_to 'Back', announcements_path(@announcement),:class=>"bg-gray-600 px-2 py-1 text-gray-50 rounded shadow text-sm" %>
+
+    <% if can? :update, @announcement %>
+      <%= link_to 'Edit', edit_announcement_path(@announcement),:class=>"bg-blue-600 px-2 py-1 text-gray-50 rounded shadow text-sm" %>
+    <% end %>
+
+    <% if can? :destroy, @announcement %>
+      <%= link_to 'Delete', announcement_path,:class=>"modal-open bg-red-400 px-2 py-1 text-gray-50 rounded shadow text-sm" %>
+    <% end %>
+
+    <% if can? :create, @announcement %>
+      <%= link_to 'New', new_announcement_path,:class=>"bg-purple-600 px-2 py-1 text-gray-50 rounded shadow text-sm" %>
+    <% end %>
+  </div>
+</main>
+</div>
+
+
+<div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
+    <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+    
+    <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+      
+      <div class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
+        <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+          <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+        </svg>
+        <span class="text-sm">(Esc)</span>
+      </div>
+
+      <!-- Add margin if you want to see some of the overlay behind the modal-->
+      <div class="modal-content py-4 text-left px-6">
+        <!--Title-->
+        <div class="flex justify-between items-center pb-3">
+          <p class="text-2xl font-bold">Attention</p>
+          <div class="modal-close cursor-pointer z-50">
+            <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+              <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+            </svg>
+          </div>
+        </div>
+
+        <!--Body-->
+        <p>Are you sure to remove this announcement?</p>
+        <p>Besides the announcement, all the associated comments will be removed too. It can not be done.</p>
+
+        <!--Footer-->
+        <div class="flex justify-end pt-2">
+          <%= link_to "Delete",announcement_path,method: :delete, :class=>"px-4 bg-transparent p-3 rounded-lg text-indigo-500 hover:bg-gray-100 hover:text-indigo-400 mr-2" %>
+          <button class="modal-close px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+<div class="md:flex md:flex-col md:justify-center md:items-center">
+<% if @announcement.comments.count < 1 %>
+  <main class="bg-white w-auto mx-4 p-4 md:p-4 my-2 md:w-3/5 rounded-lg shadow-2xl pt-6 mt-2 border-l-8 border-red-400">
+    <div class="text-xs text-gray-600">There is no comment found for this announcement!</div>
+  </main>
+<% end %>
+</div>
+
+<!--------------------Comments------------------->
+  <div class="post-comments">
+      <% @comments.each do |comment| %>
+        <div id="comment_pane">
+          <%= render 'comments/comment', comment: comment %>
+        </div>
+      <% end %>
+  </div>
+
+
+<% if user_signed_in? %>
+<!--------------------- Comment Form ------------>
+<div class="md:flex md:flex-col md:justify-center md:items-center">
+  <div class="bg-white w-auto mx-4 px-4 py-1 my-2 md:w-3/5 md:py-2 rounded-lg shadow-2xl">
+    <div class="text-gray-400 text-xs py-3">Add your comment</div>
+    <%= form_with model: [@announcement, @comment],:class=>"flex flex-col", remote: true do |f| %>
+      <%= f.text_area :body, label: false, rows: 8, class:"bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-purple-600 transition duration-500 px-3 pb-3" %>
+
+        <div class="text-left" style="padding-top: 5px">
+          <%= f.submit "Comment",:class=>"bg-purple-600 hover:bg-purple-700 text-white font-bold px-3 py-1 rounded shadow-lg hover:shadow-xl transition duration-200", remote: true %>
+        </div>
+    <% end %>
+  </div>
+</div>
+<% end %>
+
+<script>
+    var openmodal = document.querySelectorAll('.modal-open')
+    for (var i = 0; i < openmodal.length; i++) {
+      openmodal[i].addEventListener('click', function(event){
+    	event.preventDefault()
+    	toggleModal()
+      })
+    }
+    
+    const overlay = document.querySelector('.modal-overlay')
+    overlay.addEventListener('click', toggleModal)
+    
+    var closemodal = document.querySelectorAll('.modal-close')
+    for (var i = 0; i < closemodal.length; i++) {
+      closemodal[i].addEventListener('click', toggleModal)
+    }
+    
+    document.onkeydown = function(evt) {
+      evt = evt || window.event
+      var isEscape = false
+      if ("key" in evt) {
+    	isEscape = (evt.key === "Escape" || evt.key === "Esc")
+      } else {
+    	isEscape = (evt.keyCode === 27)
+      }
+      if (isEscape && document.body.classList.contains('modal-active')) {
+    	toggleModal()
+      }
+    };
+    
+    
+    function toggleModal () {
+      const body = document.querySelector('body')
+      const modal = document.querySelector('.modal')
+      modal.classList.toggle('opacity-0')
+      modal.classList.toggle('pointer-events-none')
+      body.classList.toggle('modal-active')
+    }
+  </script>

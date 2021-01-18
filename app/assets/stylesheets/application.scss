@@ -1,0 +1,52 @@
+// Hide Betternet Wrapper From View
+.profiler-results.profiler-top.profiler-left{ display: none}
+
+html,body{
+	//margin-top: 80px;
+	background-color: rgb(17, 24, 39);
+}
+
+// Fancy Notification
+#notice_wrapper{
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: 999;
+	background: #651FFF;
+	.alert, .notice{
+		padding: 1.5rem 0;
+		text-align: center;
+		margin: 0;
+		font-size: 1rem;
+		font-weight: 500;
+		color: #FFFFFF;
+		letter-spacing: 1px;
+	}
+}
+
+.active{
+	color: rgb(209, 250, 229) !important;
+}
+
+.modal {
+	transition: opacity 0.25s ease;
+  }
+  body.modal-active {
+	overflow-x: hidden;
+	overflow-y: visible !important;
+  }
+
+.gradient{
+	background: rgb(0,97,242);
+	background: linear-gradient(
+		135deg,
+		rgba(0,97,242,1) 0%,
+		rgba(105,0,199,1) 100%
+	);
+}
+
+.error_notification, .error, .hint{
+	padding: 2px 0px;
+	font-size: 0.75rem;
+	color: gray;
+}

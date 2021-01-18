@@ -1,0 +1,22 @@
+<% provide(:page_title, "Announcements") %>
+<% provide(:announcement_active, "active") %>
+
+<% if user_signed_in? %>
+    <%= render 'shared/navbar_user' %>
+<% else %>
+    <%= render 'shared/navbar_public' %>
+<% end %>
+
+<div class="md:flex md:flex-col md:justify-center md:items-center md:mt-20">
+  <main class="bg-white w-auto mx-4 px-4 py-4 md:p-12 my-10 rounded-lg shadow-2xl mt-32 md:w-2/5">
+   <section>
+      <p class="text-gray-600 pt-2">
+      <%= link_to announcements_path do %>
+        <i class="fas fa-angle-left"></i>
+      <% end %>
+      Update Announcement
+      </p>
+   </section>
+	<%= render 'form', announcement: @announcement %>
+</main>
+</div>

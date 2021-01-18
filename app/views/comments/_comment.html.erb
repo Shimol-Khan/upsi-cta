@@ -1,0 +1,23 @@
+<div id="comment-<%= comment.id %>">
+<main class="bg-white max-w-6xl mx-auto px-12 py-8 my-2 rounded-lg shadow-2xl border-l-8 border-green-500">
+	<div class="flex justify-between">
+		<div>
+			<span class="font-semibold text-sm text-gray-500 justify-items-start">
+				<%= comment.user.name %>
+			</span>
+		</div>
+
+		<div>
+			<% if user_signed_in? %>
+				<% if current_user && current_user == comment.user || current_user.admin? %>
+					<span class="bg-red-400 px-2 text-gray-50 rounded inline-block">
+						<%= link_to "Delete", announcement_comment_path(@announcement, comment), method: :delete, remote: true,:class=>"btn btn-sm btn-danger"%>
+					</span>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+	<span class="text-gray-400 text-xs"><i class="far fa-clock pr-1"></i><%= time_ago_in_words(comment.created_at) %> ago</span>
+	<p class="text-justify"><%= comment.body %></p>
+</main>
+</div>

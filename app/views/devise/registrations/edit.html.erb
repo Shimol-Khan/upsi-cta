@@ -1,0 +1,162 @@
+<% provide(:page_title, "Account Setup") %>
+
+<% if user_signed_in? %>
+    <%= render 'shared/navbar_user' %>
+<% else %>
+    <%= render 'shared/navbar_public' %>
+<% end %>
+
+<div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full space-y-8">
+    <div>
+      <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+        Update your account
+      </h2>
+      <p class="mt-2 text-center text-sm text-gray-600">
+        Or
+        <%= link_to "Delete your account if you want", "#", :class=>"modal-open font-medium text-indigo-600 hover:text-indigo-500"%>
+      </p>
+    </div>
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put },:class=>"mt-8 space-y-6") do |f| %>
+    <%= f.error_notification %>
+      <div class="rounded-md shadow-sm -space-y-px">
+        <div>
+              <%= f.input :name,
+                placeholder:"Your full name",
+                label: false,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "name",:class=>"appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" }%>
+        </div>
+        <div>
+              <%= f.input :email,
+                placeholder:"Your valid email",
+                label: false,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "email",:class=>"appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" }%>
+        </div>
+        <div>
+              <%= f.input :contact_number,
+                placeholder: "Your contact number",
+                label: false,
+                required: true,
+                hint: "leave it blank if you don't want to change it",
+                autofocus: true,
+                input_html: { autocomplete: "contact-number",:class=>"appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" }%>
+        </div>
+        <div>
+              <%= f.input :password,
+                label: "Your password",
+                placeholder: "Your password",
+                label: false,
+                required: true,
+                
+                autofocus: true,
+                input_html: { autocomplete: "new-password",:class=>"appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" }%>
+        </div>
+        <div>
+              <%= f.input :password_confirmation,
+                placeholder: "Confirm password",
+                label: false,
+                required: true,
+                hint: "we need your current password to confirm your changes",
+                autofocus: true,
+                input_html: { autocomplete: "new-password",:class=>"appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" }%>
+        </div>
+        <div>
+              <%= f.input :current_password,
+                placeholder: "Current password",
+                label: false,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "current-password",:class=>"appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" }%>
+        </div>
+      </div>
+
+      <div>
+        <%= f.button :submit, "Update", :class=>"w-full mt-2 shadow flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+<div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
+    <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+    
+    <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+      
+      <div class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
+        <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+          <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+        </svg>
+        <span class="text-sm">(Esc)</span>
+      </div>
+
+      <!-- Add margin if you want to see some of the overlay behind the modal-->
+      <div class="modal-content py-4 text-left px-6">
+        <!--Title-->
+        <div class="flex justify-between items-center pb-3">
+          <p class="text-2xl font-bold">Attention</p>
+          <div class="modal-close cursor-pointer z-50">
+            <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+              <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+            </svg>
+          </div>
+        </div>
+
+        <!--Body-->
+        <p>Are you sure to delete your account?</p>
+        <p>The action can not be done.</p>
+
+        <!--Footer-->
+        <div class="flex justify-end pt-2">
+          <%= link_to "Delete",registration_path(resource_name),method: :delete, :class=>"px-4 bg-transparent p-3 rounded-lg text-indigo-500 hover:bg-gray-100 hover:text-indigo-400 mr-2" %>
+          <button class="modal-close px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+<script>
+    var openmodal = document.querySelectorAll('.modal-open')
+    for (var i = 0; i < openmodal.length; i++) {
+      openmodal[i].addEventListener('click', function(event){
+    	event.preventDefault()
+    	toggleModal()
+      })
+    }
+    
+    const overlay = document.querySelector('.modal-overlay')
+    overlay.addEventListener('click', toggleModal)
+    
+    var closemodal = document.querySelectorAll('.modal-close')
+    for (var i = 0; i < closemodal.length; i++) {
+      closemodal[i].addEventListener('click', toggleModal)
+    }
+    
+    document.onkeydown = function(evt) {
+      evt = evt || window.event
+      var isEscape = false
+      if ("key" in evt) {
+    	isEscape = (evt.key === "Escape" || evt.key === "Esc")
+      } else {
+    	isEscape = (evt.keyCode === 27)
+      }
+      if (isEscape && document.body.classList.contains('modal-active')) {
+    	toggleModal()
+      }
+    };
+    
+    
+    function toggleModal () {
+      const body = document.querySelector('body')
+      const modal = document.querySelector('.modal')
+      modal.classList.toggle('opacity-0')
+      modal.classList.toggle('pointer-events-none')
+      body.classList.toggle('modal-active')
+    }
+  </script>

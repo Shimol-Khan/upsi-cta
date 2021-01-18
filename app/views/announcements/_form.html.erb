@@ -1,0 +1,22 @@
+<section class="mt-5">
+  <%= simple_form_for(@announcement,:class=>"flex flex-col") do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+    <div class="mb-6 pt-3 rounded bg-gray-200">
+      <label class="block text-gray-700 text-sm font-bold mb-2 ml-3" for="email">Title</label>
+      <%= f.input :title, label: false, input_html:{class:"bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-purple-600 transition duration-500 px-3 pb-3"} %>
+    </div>
+    <div class="mb-6 pt-3 rounded bg-gray-200">
+      <label class="block text-gray-700 text-sm font-bold mb-2 ml-3" for="email">Image Link</label>
+      <%= f.input :image_link, label: false, input_html:{class:"bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-purple-600 transition duration-500 px-3 pb-3"} %>
+    </div>
+    <div class="mb-6 pt-3 rounded bg-gray-200">
+      <label class="block text-gray-700 text-sm font-bold mb-2 ml-3" for="email">Body</label>
+      <%= f.input :body, label: false, input_html:{class:"bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-purple-600 transition duration-500 px-3 pb-3"} %>
+    </div>
+
+    <%= f.association :user, as: :hidden %>
+
+    <%= f.button :submit,:class=>"bg-purple-600 hover:bg-purple-700 text-white font-bold px-3 py-3 rounded shadow-lg hover:shadow-xl transition duration-200"%>
+  <% end %>
+</section>

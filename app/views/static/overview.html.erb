@@ -1,0 +1,10 @@
+<% provide(:page_title, "Overview") %>
+<% provide(:overview_active, "active") %>
+
+<% if user_signed_in? %>
+    <%= render 'shared/navbar_user' %>
+<% else %>
+    <%= render 'shared/navbar_public' %>
+<% end %>
+
+<%= javascript_pack_tag 'index' %>

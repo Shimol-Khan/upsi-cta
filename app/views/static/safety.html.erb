@@ -1,0 +1,106 @@
+<% provide(:page_title, "Safety") %>
+<% provide(:safety_active, "active") %>
+
+<% if user_signed_in? %>
+    <%= render 'shared/navbar_user' %>
+<% else %>
+    <%= render 'shared/navbar_public' %>
+<% end %>
+
+<div class="flex flex-rows items-center justify-center mt-20">
+    <div class="w-auto px-10 py-4 md:flex-col md:w-4/5 md:flex md:items-left md:justify-center md:pt-20">
+            <h2 class="text-sm text-green-200 md:text-3xl">Coronavirus Safety Tips For <span class="animate"></span></h2>
+            <p class="text-xs text-gray-400 py-4 text-justify md:text-2xl">
+                The American Red Cross is closely monitoring the coronavirus disease 2019 (COVID-19) pandemic and following the latest guidance from the U.S. Centers for Disease Control and Prevention (CDC).According to the CDC, COVID-19 symptoms include fever, coughing and shortness of breath, plus others. Symptoms may appear 2-14 days after exposure.
+                <br>
+                Call your doctor for medical advice if you think you have been exposed to COVID-19 or develop symptoms.
+            </p>
+
+            <div class="md:inline md:mt-4">
+            <%= link_to "https://www.redcross.org/get-help/how-to-prepare-for-emergencies/types-of-emergencies/coronavirus-safety.html", :target=>"_blank",:class=>"mx-1 px-3 py-1 text-sm text-white shadow bg-red-400 rounded-full md:py-2 md:px-4" do %>
+                <span><i class="fas fa-plus-circle"></i></span> Learn more
+            <% end %>
+
+            <%= link_to announcements_path, :target=>"_blank",:class=>"mx-1 px-3 py-1 text-sm text-white shadow bg-green-500 rounded-full md:py-2 md:px-4" do %>
+                <span><i class="fas fa-arrow-circle-right"></i></span> Announcements
+            <% end %>
+            </div>
+    </div>
+</div>
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#fff" fill-opacity="1" d="M0,192L60,170.7C120,149,240,107,360,117.3C480,128,600,192,720,218.7C840,245,960,235,1080,192C1200,149,1320,75,1380,37.3L1440,0L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+
+<div class="bg-white px-4">
+    <div class="flex items-center justify-center">
+        <div class="px-10 py-4">
+            <%= image_tag('safety.svg', :class=>"h-20 w-20 md:h-60 md:w-60")%>
+        </div>
+    </div>
+    <div class="text-center text-sm text-gray-600 pb-3 md:text-2xl">
+        Use Healthy Practices to Protect Yourself
+    </div>
+
+    <div class="flex justify-center items-center">
+        <div class="w-auto md:w-1/2 px-2 md:px-10 text-sm md:text-base">
+            Wash your hands often with soap and water for at least 20 seconds, especially after being in a public place, or after blowing your nose, coughing or sneezing. If soap and water are not readily available, use a hand sanitizer with at least 60% alcohol.
+        </div>
+        <div class="w-auto md:w-10"><%= image_tag('wash.svg', :class=>"inline h-60 w-60 text-center md:inline md:h-24 md:w-24 md:text-center")%></div>
+    </div>
+
+    <div class="flex justify-center items-center">
+        <div class="w-auto md:w-1/2 px-2 md:px-10 text-sm md:text-base">
+            Avoid touching your eyes, nose and mouth with unwashed hands.
+        </div>
+        <div class="w-auto md:w-10"><%= image_tag('fingerprint.svg', :class=>"inline h-12 w-12 text-center md:inline md:h-24 md:w-24 md:text-center")%></div>
+    </div>
+
+    <div class="flex justify-center items-center">
+        <div class="w-auto md:w-1/2 px-2 md:px-10 text-sm md:text-base">
+            Avoid close contact with people who are sick, and practice social distancing by keeping at least 6 feet away from others if you must go out in public.
+        </div>
+        <div class="w-auto md:w-10"><%= image_tag('arrow.svg', :class=>"inline h-32 w-32 text-center md:inline md:h-24 md:w-24 md:text-center")%></div>
+    </div>
+
+    <div class="flex justify-center items-center">
+        <div class="w-auto md:w-1/2 px-2 md:px-10 text-sm md:text-base">
+            Wear a cloth face covering to cover your mouth and nose when around others and when you must go out in public. The cloth face cover is meant to protect other people in case you are infected. Don’t place one on young children under age 2, anyone who has trouble breathing, or is unconscious, incapacitated or otherwise unable to remove the mask without assistance.
+        </div>
+        <div class="w-auto md:w-10"><%= image_tag('mask.svg', :class=>"inline h-64 w-64 text-center md:inline md:h-24 md:w-24 md:text-center")%></div>
+    </div>
+
+    <div class="flex justify-center items-center">
+        <div class="w-auto md:w-1/2 px-2 md:px-10 text-sm md:text-base">
+            Cover your nose and mouth with a tissue when coughing or sneezing and throw the tissue away after use. If a tissue isn’t available, cough or sneeze into your elbow or sleeve, not your hands.
+        </div>
+        <div class="w-auto md:w-10"><%= image_tag('tissue.svg', :class=>"inline h-36 w-36 text-center md:inline md:h-24 md:w-24 md:text-center")%></div>
+    </div>
+
+    <div class="flex justify-center items-center">
+        <div class="w-auto md:w-1/2 px-2 md:px-10 text-sm md:text-base">
+            Clean and disinfect frequently touched surfaces daily. This includes tables, doorknobs, light switches, handles, desks, computers, phones, keyboards, sinks, toilets, faucets and countertops.
+        </div>
+        <div class="w-auto md:w-10"><%= image_tag('clean.svg', :class=>"inline h-36 w-36 text-center md:inline md:h-24 md:w-24 md:text-center")%></div>
+    </div>
+
+
+    <div class="flex w-full items-center justify-center">
+        <div class="flex w-60 px-6 text-sm text-gray-150 py-4 items-left">
+            <%= link_to "Read More", "https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/disinfecting-your-home.html", :target=>"_blank", :class=>"px-2 w-full text-sm text-center bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400"%>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+<script>
+    var typed = new Typed('.animate',{
+        strings: [
+            "You",
+            "Your Family",
+            "Your Friends"
+        ],
+        typeSpeed: 50,
+        backSpeed: 50,
+        loop: true
+    })
+</script>
+

@@ -1,0 +1,40 @@
+html,body{margin-top: 50px;}
+.container {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  
+  margin: 0px;
+  background-color: rgb(17, 24, 39) !important;
+}
+
+.card {
+  margin:0 2% !important;
+}
+
+.infected {
+  background-image: linear-gradient(to right, #6a3093, #a044ff);;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23) !important;
+}
+
+.recovered{
+  background-image: linear-gradient(to right, #11998e, #38ef7d);;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23) !important;
+}
+
+.deaths{
+  background-image: linear-gradient(to right, #F54B64, #F78361);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23) !important;
+}
+
+@media only screen and (max-width: 770px) {
+  .card {
+    margin: 2% 0 !important;
+  }
+}
